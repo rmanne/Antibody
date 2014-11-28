@@ -1,6 +1,6 @@
 Crafty.c("Unit",{
   init: function(){
-    this.requires('2D, Canvas');
+    this.requires('2D, Canvas, Collision');
   },
 
   at: function(x,y){
