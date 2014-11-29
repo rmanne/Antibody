@@ -18,7 +18,6 @@ Crafty.scene('Game', function() {
 
   Crafty.e('Wall').at(10,-16);
   Crafty.e('Wall').at(10,540);
-  Crafty.e('PlayerCharacter').at(10,30);
 }, function() {
 
 });

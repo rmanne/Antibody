@@ -17,7 +17,7 @@ Crafty.c("Unit",{
 Crafty.c("PlayerCharacter",{
   init: function(){
     this.requires("Unit, Fourway, spr_player")
-      .multiway(2, {UP_ARROW: -90, DOWN_ARROW: 90})
+      .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemy)
       .onHit('Wall', this.wall)
       .onHit('Powerup', this.powerup);
