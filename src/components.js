@@ -63,12 +63,17 @@ Crafty.c("Enemy",{
   init: function(){
     this.requires("Unit, spr_bush")
       .bind("EnterFrame",this.act);   
+    var rand = Math.random();
+    if(rand < .4) this.speed = Game.enemySpeed1;
+    else if(rand < .8) this.speed = Game.enemySpeed2;
+    else this.speed=Game.enemySpeed3;
   },
   act: function(){
     if (this.x < 0) {
       Crafty("PlayerCharacter").enemy_custom(this);
     }
-    this.move("w",Game.enemySpeed);
+
+    this.move("w",this.speed);
   }
 });
 

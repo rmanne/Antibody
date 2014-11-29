@@ -7,12 +7,10 @@ Crafty.scene('Game', function() {
 
   this.numKilled = 0;
   Crafty.bind("EnterFrame",function(e){
-    if(e.frame%60 == 0){
-      var x1 = Math.random()*Game.width()/2+Game.width()/2;
-      var x2 = Math.random()*Game.width()/2+Game.width()/2;
-      var y1 = Math.random()*Game.height();
-      var y2 = Math.random()*Game.height();
-      Crafty.e("Enemy").at(x1,y1);
+    if(e.frame%Game.spawnDelay == 0){
+      var y = Math.random()*(Game.height()-Game.shooterHeight) + Game.shooterHeight/2;
+      var x = Game.width()-Game.shooterWidth*2;
+      Crafty.e("Enemy").at(x,y);
     }
   });
 

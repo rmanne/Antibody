@@ -1,7 +1,12 @@
 Game = {
-  walkingSpeed: 3,
+  walkingSpeed: 4,
   bulletSpeed: 2,
-  enemySpeed: 1,
+  enemySpeed1: 1,
+  enemySpeed2: 2,
+  enemySpeed3: 3,
+  spawnDelay: 60,
+  shooterWidth: 16,
+  shooterHeight: 16,
 
 	// The total width of the game screen. 
 	// This is just the width of a tile times the width of the grid
