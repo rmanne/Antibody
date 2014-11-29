@@ -18,7 +18,9 @@ Crafty.scene('Game', function() {
     }
   });
 
-  Crafty.e('PlayerCharacter').at(10,10);
+  Crafty.e('Wall').at(10,-16);
+  Crafty.e('Wall').at(10,540);
+  Crafty.e('PlayerCharacter').at(10,30);
   Crafty.e('Enemy').at(50,10);
   Crafty.e('Enemy').at(50,30);
   Crafty.e('Enemy').at(50,50);
