@@ -5,10 +5,12 @@ Crafty.c("Unit",{
 
   at: function(x,y){
     this.attr({x: x, y: y});
+    return this;
   },
 
   resize: function(w,h){
     this.attr({w: w, h: h});
+    return this;
   }
 });
 
@@ -29,7 +31,6 @@ Crafty.c("PlayerCharacter",{
     this.attr("health", 100);
   },
   hit: function(data) {
-    var enemy  = data[0].obj;
     var health = this.attr("health");
     if (health > 10) {
       this.attr("health", health - 10);
@@ -37,7 +38,6 @@ Crafty.c("PlayerCharacter",{
       this.attr("health", 0);
       // TODO: die please
     }
-    enemy.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   powerup: function(data) {
     var powerobj = data[0].obj;
@@ -48,14 +48,30 @@ Crafty.c("PlayerCharacter",{
 
 Crafty.c("Enemy",{
   init: function(){
-    this.requires("Shooter, spr_tree")
-      .stopOnSolids();
+    this.requires("Shooter")
+      .stopOnSolids()
+      .onHit('PlayerCharacter', this.dispose);
+  },
+  dispose: function(data) {
+    this.destroy();
   }
 });
 
 Crafty.c("Powerup",{
   init: function(){
-    this.requires("Unit, spr_village");
+    this.requires("Unit");
   }
   //to add: collide with player, time limit
+});
+
+Crafty.c("Bullet",{
+  init: function(){
+    this.requires('Unit, spr_player')
+      .bind("EnterFrame", this.act);
+  },
+
+  act: function(){  
+    this.move("e",Game.bulletSpeed);
+  }
+
 });

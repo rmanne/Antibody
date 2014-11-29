@@ -2,9 +2,12 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
-	Crafty.e('PlayerCharacter').at(10,10);
-  Crafty.e('Enemy').at(50,50);
-  Crafty.e('Powerup').at(90,90);
+	var a = Crafty.e('Bullet');
+  // console.log(a);
+  a.at(5,5).at(10,10);
+  // console.log(a.x);
+  // a.move("s",1);
+  // a.act();
 }, function() {
 
 });
