@@ -29,6 +29,7 @@ Crafty.c("PlayerCharacter",{
     this.attr("health", 100);
   },
   hit: function(data) {
+    var enemy  = data[0].obj;
     var health = this.attr("health");
     if (health > 10) {
       this.attr("health", health - 10);
@@ -36,6 +37,7 @@ Crafty.c("PlayerCharacter",{
       this.attr("health", 0);
       // TODO: die please
     }
+    enemy.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   powerup: function(data) {
     var powerobj = data[0].obj;
@@ -46,18 +48,14 @@ Crafty.c("PlayerCharacter",{
 
 Crafty.c("Enemy",{
   init: function(){
-    this.requires("Shooter")
-      .stopOnSolids()
-      .onHit('PlayerCharacter', this.dispose);
-  },
-  dispose: function(data) {
-    this.destroy();
+    this.requires("Shooter, spr_tree")
+      .stopOnSolids();
   }
 });
 
 Crafty.c("Powerup",{
   init: function(){
-    this.requires("Unit");
+    this.requires("Unit, spr_village");
   }
   //to add: collide with player, time limit
 });
