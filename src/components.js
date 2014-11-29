@@ -16,7 +16,7 @@ Crafty.c("Unit",{
 
 Crafty.c("PlayerCharacter",{
   init: function(){
-    this.requires("Unit, Fourway, spr_player")
+    this.requires("Unit, Multiway, spr_player")
       .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemy)
       .onHit('Wall', this.wall)
@@ -31,8 +31,8 @@ Crafty.c("PlayerCharacter",{
       this.y = 0;
     }
   },
-  enemy: function(data) {
-    var enemy  = data[0].obj;
+  enemy_custom: function(data) {
+    var enemy = data;
     if (this.health > 10) {
       this.health = this.health - 10;
     } else {
@@ -41,6 +41,10 @@ Crafty.c("PlayerCharacter",{
       // TODO: die please
     }
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
+  },
+  enemy: function(data) {
+    var enemy  = data[0].obj;
+    enemy_custom(enemy);
   },
   powerup: function(data) {
     var powerobj = data[0].obj;
@@ -51,15 +55,13 @@ Crafty.c("PlayerCharacter",{
 
 Crafty.c("Enemy",{
   init: function(){
-    this.requires("Unit, spr_player")
-      // .stopOnSolids()
-      .onHit('PlayerCharacter', this.dispose) 
+    this.requires("Unit, spr_bush")
       .bind("EnterFrame",this.act);   
   },
-  dispose: function(data) {
-    this.destroy();
-  },
   act: function(){
+    if (this.x < 0) {
+      Crafty("PlayerCharacter").enemy_custom(this);
+    }
     this.move("w",Game.enemySpeed);
   }
 });
