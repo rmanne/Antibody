@@ -26,7 +26,7 @@ Crafty.c("PlayerCharacter",{
   },
   wall: function(data) {
     if (this.y > 0) {
-      this.y = 540 - 16;
+      this.y = Game.height() - Game.shooterHeight;
     } else {
       this.y = 0;
     }
