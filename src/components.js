@@ -52,7 +52,6 @@ Crafty.c("PlayerCharacter",{
 Crafty.c("Enemy",{
   init: function(){
     this.requires("Unit, spr_bush")
-      // .stopOnSolids()
       .onHit('PlayerCharacter', this.dispose);
   },
   dispose: function(data) {
