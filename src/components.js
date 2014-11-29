@@ -32,7 +32,17 @@ Crafty.c("PlayerCharacter",{
     }
   },
   enemy_custom: function(data) {
-    var enemy = data;
+    if (this.health > 10) {
+      this.health = this.health - 10;
+    } else {
+      this.health = 0;
+      alert("You're dead!");
+      // TODO: die please
+    }
+    data.destroy(); // TODO: decide whether we will do anything about the enemy
+  },
+  enemy: function(data) {
+    var enemy = data[0].obj;
     if (this.health > 10) {
       this.health = this.health - 10;
     } else {
@@ -41,10 +51,6 @@ Crafty.c("PlayerCharacter",{
       // TODO: die please
     }
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
-  },
-  enemy: function(data) {
-    var enemy  = data[0].obj;
-    enemy_custom(enemy);
   },
   powerup: function(data) {
     var powerobj = data[0].obj;
