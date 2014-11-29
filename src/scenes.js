@@ -2,12 +2,21 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
-	var a = Crafty.e('Bullet');
-  // console.log(a);
-  a.at(5,5).at(10,10);
-  // console.log(a.x);
-  // a.move("s",1);
-  // a.act();
+	// var a = Crafty.e('Bullet');
+  // a.at(5,5).at(10,10);
+
+  this.numKilled = 0;
+  Crafty.bind("EnterFrame",function(e){
+    if(e.frame%60 == 0){
+      console.log("here");
+      var x1 = Math.random()*Game.width();
+      var x2 = Math.random()*Game.width();
+      var y1 = Math.random()*Game.height();
+      var y2 = Math.random()*Game.height();
+      Crafty.e("Enemy").at(x1,y1);
+      Crafty.e("Enemy").at(x2,y2);
+    }
+  });
 }, function() {
 
 });

@@ -48,8 +48,8 @@ Crafty.c("PlayerCharacter",{
 
 Crafty.c("Enemy",{
   init: function(){
-    this.requires("Shooter")
-      .stopOnSolids()
+    this.requires("Shooter, spr_player")
+      // .stopOnSolids()
       .onHit('PlayerCharacter', this.dispose);
   },
   dispose: function(data) {
