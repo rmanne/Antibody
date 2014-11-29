@@ -7,7 +7,7 @@ Crafty.scene('Game', function() {
 
   this.numKilled = 0;
   Crafty.bind("EnterFrame",function(e){
-    if(e.frame%Game.spawnDelay == 0){
+    if(e.frame%(Math.max(Game.spawnDelay-this.numKilled,10)) == 0){
       var y = Math.random()*(Game.height()-Game.shooterHeight) + Game.shooterHeight/2;
       var x = Game.width()-Game.shooterWidth*2;
       Crafty.e("Enemy").at(x,y);

@@ -4,7 +4,7 @@ Game = {
   enemySpeed1: 1,
   enemySpeed2: 2,
   enemySpeed3: 3,
-  spawnDelay: 60,
+  spawnDelay: 120,
   shooterWidth: 16,
   shooterHeight: 16,
 
