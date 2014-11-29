@@ -45,10 +45,14 @@ Crafty.c("Enemy",{
   init: function(){
     this.requires("Unit, spr_player")
       // .stopOnSolids()
-      .onHit('PlayerCharacter', this.dispose);
+      .onHit('PlayerCharacter', this.dispose) 
+      .bind("EnterFrame",this.act);   
   },
   dispose: function(data) {
     this.destroy();
+  },
+  act: function(){
+    this.move("w",Game.enemySpeed);
   }
 });
 

@@ -1,5 +1,6 @@
 Game = {
   bulletSpeed: 2,
+  enemySpeed: 10,
 
 	// The total width of the game screen. 
 	// This is just the width of a tile times the width of the grid

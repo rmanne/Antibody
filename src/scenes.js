@@ -2,15 +2,14 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
-	// var a = Crafty.e('Bullet');
-  // a.at(5,5).at(10,10);
+	var a = Crafty.e('PlayerCharacter').at(5,5);
+  a.shift(10,10);
 
   this.numKilled = 0;
   Crafty.bind("EnterFrame",function(e){
     if(e.frame%60 == 0){
-      console.log("here");
-      var x1 = Math.random()*Game.width();
-      var x2 = Math.random()*Game.width();
+      var x1 = Math.random()*Game.width()/2+Game.width()/2;
+      var x2 = Math.random()*Game.width()/2+Game.width()/2;
       var y1 = Math.random()*Game.height();
       var y2 = Math.random()*Game.height();
       Crafty.e("Enemy").at(x1,y1);
@@ -18,18 +17,18 @@ Crafty.scene('Game', function() {
     }
   });
 
-  Crafty.e('PlayerCharacter').at(10,10);
-  Crafty.e('Enemy').at(50,10);
-  Crafty.e('Enemy').at(50,30);
-  Crafty.e('Enemy').at(50,50);
-  Crafty.e('Enemy').at(50,70);
-  Crafty.e('Enemy').at(50,90);
-  Crafty.e('Enemy').at(70,10);
-  Crafty.e('Enemy').at(70,30);
-  Crafty.e('Enemy').at(70,50);
-  Crafty.e('Enemy').at(70,70);
-  Crafty.e('Enemy').at(70,90);
-  Crafty.e('Powerup').at(90,90);
+  // Crafty.e('PlayerCharacter').at(10,10);
+  // Crafty.e('Enemy').at(50,10);
+  // Crafty.e('Enemy').at(50,30);
+  // Crafty.e('Enemy').at(50,50);
+  // Crafty.e('Enemy').at(50,70);
+  // Crafty.e('Enemy').at(50,90);
+  // Crafty.e('Enemy').at(70,10);
+  // Crafty.e('Enemy').at(70,30);
+  // Crafty.e('Enemy').at(70,50);
+  // Crafty.e('Enemy').at(70,70);
+  // Crafty.e('Enemy').at(70,90);
+  // Crafty.e('Powerup').at(90,90);
 }, function() {
 
 });
