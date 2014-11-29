@@ -1,14 +1,14 @@
 Game = {
   bulletSpeed: 2,
 
-	// The total width of the game screen. Since our grid takes up the entire screen
-	//  this is just the width of a tile times the width of the grid
+	// The total width of the game screen. 
+	// This is just the width of a tile times the width of the grid
 	width: function() {
     return 1080;
 	},
 
-	// The total height of the game screen. Since our grid takes up the entire screen
-	//  this is just the height of a tile times the height of the grid
+	// The total height of the game screen. 
+  // This is just the height of a tile times the height of the grid
 	height: function() {
     return 540;
 	},
@@ -23,4 +23,5 @@ Game = {
 	}
 };
 
-$text_css = { 'size': '24px', 'family': 'Arial', 'color': 'red', 'text-align': 'center' };
+$text_css = { 'size': '24px', 'family': 'Arial', 'color': 'red',
+              'text-align': 'center' };

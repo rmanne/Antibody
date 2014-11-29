@@ -5,12 +5,10 @@ Crafty.c("Unit",{
 
   at: function(x,y){
     this.attr({x: x, y: y});
-    return this;
   },
 
   resize: function(w,h){
     this.attr({w: w, h: h});
-    return this;
   }
 });
 
@@ -43,12 +41,7 @@ Crafty.c("PlayerCharacter",{
 
 Crafty.c("Enemy",{
   init: function(){
-    this.requires("Unit, spr_player")
-      // .stopOnSolids()
-      .onHit('PlayerCharacter', this.dispose);
-  },
-  dispose: function(data) {
-    this.destroy();
+    this.requires("Unit, spr_tree");
   }
 });
 
@@ -57,16 +50,4 @@ Crafty.c("Powerup",{
     this.requires("Unit, spr_village");
   }
   //to add: collide with player, time limit
-});
-
-Crafty.c("Bullet",{
-  init: function(){
-    this.requires('Unit, spr_rock')
-      .bind("EnterFrame", this.act);
-  },
-
-  act: function(){  
-    this.move("e",Game.bulletSpeed);
-  }
-
 });
