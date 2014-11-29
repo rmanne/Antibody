@@ -13,22 +13,12 @@ Crafty.scene('Game', function() {
       var y1 = Math.random()*Game.height();
       var y2 = Math.random()*Game.height();
       Crafty.e("Enemy").at(x1,y1);
-      Crafty.e("Enemy").at(x2,y2);
     }
   });
 
-  // Crafty.e('PlayerCharacter').at(10,10);
-  // Crafty.e('Enemy').at(50,10);
-  // Crafty.e('Enemy').at(50,30);
-  // Crafty.e('Enemy').at(50,50);
-  // Crafty.e('Enemy').at(50,70);
-  // Crafty.e('Enemy').at(50,90);
-  // Crafty.e('Enemy').at(70,10);
-  // Crafty.e('Enemy').at(70,30);
-  // Crafty.e('Enemy').at(70,50);
-  // Crafty.e('Enemy').at(70,70);
-  // Crafty.e('Enemy').at(70,90);
-  // Crafty.e('Powerup').at(90,90);
+  Crafty.e('Wall').at(10,-16);
+  Crafty.e('Wall').at(10,540);
+  Crafty.e('PlayerCharacter').at(10,30);
 }, function() {
 
 });
@@ -99,9 +89,9 @@ Crafty.scene('Loading', function(){
 
     // Define our sounds for later use
     Crafty.audio.add({
-      knock:    ['assets/door_knock_3x.mp3', 'assets/door_knock_3x.ogg', 'assets/door_knock_3x.aac'],
-      applause: ['assets/board_room_applause.mp3', 'assets/board_room_applause.ogg', 'assets/board_room_applause.aac'],
-      ring:     ['assets/candy_dish_lid.mp3', 'assets/candy_dish_lid.ogg', 'assets/candy_dish_lid.aac']
+      knock:    ['assets/door_knock_3x.mp3', 'assets/door_knock_3x.ogg'],
+      applause: ['assets/board_room_applause.mp3', 'assets/board_room_applause.ogg'],
+      ring:     ['assets/candy_dish_lid.mp3', 'assets/candy_dish_lid.ogg']
     });
     // Now that our sprites are ready to draw, start the game
     Crafty.scene('Game');

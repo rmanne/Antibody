@@ -17,11 +17,19 @@ Crafty.c("Unit",{
 Crafty.c("PlayerCharacter",{
   init: function(){
     this.requires("Unit, Fourway, spr_player")
-      .fourway(2)
+      .multiway(2, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemy)
+      .onHit('Wall', this.wall)
       .onHit('Powerup', this.powerup);
     //to add: collide with powerups, enemies, shooting
     this.health = 100;
+  },
+  wall: function(data) {
+    if (this.y > 0) {
+      this.y = 540 - 16;
+    } else {
+      this.y = 0;
+    }
   },
   enemy: function(data) {
     var enemy  = data[0].obj;
@@ -73,4 +81,10 @@ Crafty.c("Bullet",{
     this.move("e",Game.bulletSpeed);
   }
 
+});
+
+Crafty.c("Wall",{
+  init: function() {
+    this.requires('Unit, spr_player');
+  }
 });
