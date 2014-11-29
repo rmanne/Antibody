@@ -14,8 +14,8 @@ Crafty.scene('Game', function() {
     }
   });
 
-  Crafty.e('Wall').at(10,-16);
-  Crafty.e('Wall').at(10,540);
+  Crafty.e('Wall').at(10,-Game.shooterHeight);
+  Crafty.e('Wall').at(10,Game.height());
 }, function() {
 
 });
