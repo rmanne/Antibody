@@ -2,6 +2,7 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
+  Crafty.audio.play("music");
   Crafty.e('Wall').at(10,Game.barHeight-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height);
   
