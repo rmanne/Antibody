@@ -23,7 +23,7 @@ Crafty.c("PlayerCharacter",{
       .onHit('Wall', this.wall)
       .onHit('Powerup', this.powerup)
       .resize(Game.shooterWidth,Game.shooterHeight);
-    this.health = 100;
+    this.health = Game.totalHealth;
     this.counter = 0;
     this.power = 0;
   },
@@ -42,6 +42,7 @@ Crafty.c("PlayerCharacter",{
       alert("You're dead!");
       // TODO: die please (game over)
     }
+    Crafty.trigger("HealthLost",this);
     data.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   enemyShot: function(data) {
@@ -53,6 +54,7 @@ Crafty.c("PlayerCharacter",{
       alert("You're dead!");
       // TODO: die please (game over)
     }
+    Crafty.trigger("HealthLost",this);
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   powerup: function(data) {
@@ -181,7 +183,7 @@ Crafty.c("WidePowerBullet",{
 
 Crafty.c("Wall",{
   init: function() {
-    this.requires('Unit, spr_player')
+    this.requires('Unit')
       .resize(Game.shooterWidth,Game.shooterHeight);
   }
 });
@@ -210,22 +212,20 @@ Crafty.c("Bar",{
     this.requires("2D, Canvas, Color")
       .color("green")
       .attr({x: 0, y: 0, w: Game.width(), h: Game.barHeight});
-    this._healthBar = Crafty.e('2D, Canvas, Color')
-      .color("orange")
-      .attr({x: 10, y: 10, w: 0, h: 10});
+    this.points = Crafty.e('2D, DOM, Text')
+      .text('Points: 0')
+      .attr({ x: 0, y: 0, w: 100 })
+      .textFont($text_css);
   },
 
   health: function(health){
-    this._healthBar.w = health*10;
-    this.points = Crafty.e('2D, DOM, Text')
-      .text('Points: 0')
-      .attr({ x: 0, y: 0, w: Game.width() })
-      .textFont($text_css);
+    this.w = health/Game.totalHealth*Game.width();
+    return this;
   },
   update: function(number) {
     this.points.destroy();
     this.points = Crafty.e('2D, DOM, Text')
-      .text('Points: ' + number)
+      .text('Points: ' + (number*100))
       .attr({ x: 0, y: 0, w: Game.width()})
       .textFont($text_css);
   }

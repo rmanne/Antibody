@@ -4,11 +4,11 @@
 Crafty.scene('Game', function() {
   Crafty.e('Wall').at(10,Game.barHeight-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height());
-  Crafty.e("Bar").color("green");
 
-  Crafty.e('PlayerCharacter')
+  var player = Crafty.e('PlayerCharacter')
     .at(5,Game.height()/2)
     .resize(Game.shooterWidth,Game.shooterHeight);
+  var bar = Crafty.e("Bar").color("green").health(player.health);
 
   this.numKilled = 0;
   this.funA = this.bind("EnterFrame",function(e){
@@ -22,7 +22,7 @@ Crafty.scene('Game', function() {
   });
   this.funB = this.bind("EnemyKilled",function(e){
     this.numKilled++;
-    Crafty("Bar").update(this.numKilled);
+    bar.update(this.numKilled);
   });
 
   // Pause scene
@@ -42,10 +42,15 @@ Crafty.scene('Game', function() {
         Crafty("PlayerCharacter").shoot();
   });
 
+  this.funD = this.bind('HealthLost', function(){
+    bar.health(player.health);
+  });
+
 }, function() {
   this.unbind("EnterFrame",this.funA);
   this.unbind("EnemyKilled",this.funB);
   this.unbind("KeyDown",this.funC);
+  this.unbind("HealthLost",this.funD);
 });
 
 
