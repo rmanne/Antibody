@@ -210,5 +210,13 @@ Crafty.c("Bar",{
     this.requires("2D, Canvas, Color")
       .color("green")
       .attr({x: 0, y: 0, w: Game.width(), h: Game.barHeight});
+    this._healthBar = Crafty.e('2D, Canvas, Color')
+      .color("orange")
+      .attr({x: 10, y: 10, w: 0, h: 10});
+  },
+
+  health: function(health){
+    this._healthBar.w = health*10;
   }
+
 });

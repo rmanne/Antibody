@@ -13,8 +13,8 @@ Crafty.scene('Game', function() {
   this.numKilled = 0;
   this.funA = this.bind("EnterFrame",function(e){
     if(e.frame%(Math.max(Game.spawnDelay-this.numKilled,10)) == 0){
-      var y = Math.random()*(Game.height()-Game.shooterHeight)
-                ;
+      var y = Math.random()*(Game.height()-Game.shooterHeight-Game.barHeight)
+              + Game.barHeight;
       var x = Game.width()-Game.shooterWidth*2;
       Crafty.e("Enemy").at(x,y).resize(Game.shooterWidth,Game.shooterHeight);
       Crafty.e('Powerup').at(x, y + 20);
@@ -28,7 +28,7 @@ Crafty.scene('Game', function() {
   // -----------
   // Handles pausing the game
   var text = Crafty.e('Pause');
-  this.bind('KeyDown', function(e) {
+  this.funC = this.bind('KeyDown', function(e) {
       if(e.key === Crafty.keys.P) {
           if (!Crafty.isPaused()) {
               text.draw();
@@ -44,6 +44,7 @@ Crafty.scene('Game', function() {
 }, function() {
   this.unbind("EnterFrame",this.funA);
   this.unbind("EnemyKilled",this.funB);
+  this.unbind("KeyDown",this.funC);
 });
 
 
@@ -112,10 +113,9 @@ Crafty.scene('Loading', function(){
 
     // Define our sounds for later use
     Crafty.audio.add({
-      knock:    ['assets/door_knock_3x.mp3', 'assets/door_knock_3x.ogg'],
-      applause: ['assets/board_room_applause.mp3',
-                 'assets/board_room_applause.ogg'],
-      ring:     ['assets/candy_dish_lid.mp3', 'assets/candy_dish_lid.ogg']
+      knock:    ['assets/door_knock_3x.mp3'],
+      applause: ['assets/board_room_applause.mp3'],
+      ring:     ['assets/candy_dish_lid.mp3']
     });
     // Now that our sprites are ready to draw, start the game
     Crafty.scene('Game');
