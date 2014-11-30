@@ -2,8 +2,13 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
-	var a = Crafty.e('PlayerCharacter').at(5,5).resize(Game.shooterWidth,Game.shooterHeight);
-  a.shift(10,10);
+  Crafty.e('Wall').at(10,Game.barHeight-Game.shooterHeight);
+  Crafty.e('Wall').at(10,Game.height());
+  Crafty.e("Bar").color("green");
+
+  Crafty.e('PlayerCharacter')
+    .at(5,Game.height()/2)
+    .resize(Game.shooterWidth,Game.shooterHeight);
 
   this.numKilled = 0;
   this.funA = this.bind("EnterFrame",function(e){
@@ -36,9 +41,6 @@ Crafty.scene('Game', function() {
         Crafty("PlayerCharacter").shoot();
   });
 
-  Crafty.e('Wall').at(10,-Game.shooterHeight);
-  Crafty.e('Wall').at(10,Game.height());
-  Crafty.e("Bar");
 }, function() {
   this.unbind("EnterFrame",this.funA);
   this.unbind("EnemyKilled",this.funB);
@@ -71,13 +73,13 @@ Crafty.scene('Loading', function(){
   Crafty.load({
     'audio': [
       'assets/door_knock_3x.mp3',
-      'assets/door_knock_3x.ogg',
+      // 'assets/door_knock_3x.ogg',
       // 'assets/door_knock_3x.aac',
       'assets/board_room_applause.mp3',
-      'assets/board_room_applause.ogg',
+      // 'assets/board_room_applause.ogg',
       // 'assets/board_room_applause.aac',
       'assets/candy_dish_lid.mp3',
-      'assets/candy_dish_lid.ogg',
+      // 'assets/candy_dish_lid.ogg',
       // 'assets/candy_dish_lid.aac'
     ],
 

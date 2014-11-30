@@ -8,6 +8,7 @@ Game = {
   shooterWidth: 32,
   shooterHeight: 32,
   shootingDelay: 25,
+  barHeight: 54,
 
   // The total width of the game screen. 
   // This is just the width of a tile times the width of the grid

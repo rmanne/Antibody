@@ -28,10 +28,10 @@ Crafty.c("PlayerCharacter",{
     this.power = 0;
   },
   wall: function(data) {
-    if (this.y > 0) {
+    if (this.y > Game.barHeight) {
       this.y = Game.height() - Game.shooterHeight;
     } else {
-      this.y = 0;
+      this.y = Game.barHeight;
     }
   },
   enemyWalled: function(data) {
@@ -181,7 +181,8 @@ Crafty.c("WidePowerBullet",{
 
 Crafty.c("Wall",{
   init: function() {
-    this.requires('Unit, spr_player');
+    this.requires('Unit, spr_player')
+      .resize(Game.shooterWidth,Game.shooterHeight);
   }
 });
 
@@ -206,6 +207,8 @@ Crafty.c("Pause", {
 
 Crafty.c("Bar",{
   init: function(){
-    
+    this.requires("2D, Canvas, Color")
+      .color("green")
+      .attr({x: 0, y: 0, w: Game.width(), h: Game.barHeight});
   }
 });
