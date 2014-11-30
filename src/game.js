@@ -1,34 +1,34 @@
 Game = {
   walkingSpeed: 4,
-  bulletSpeed: 2,
+  bulletSpeed: 6,
   enemySpeed1: 1,
   enemySpeed2: 2,
   enemySpeed3: 3,
   spawnDelay: 120,
   shooterWidth: 16,
   shooterHeight: 16,
-  shootingDelay: 5,
+  shootingDelay: 25,
 
-	// The total width of the game screen. 
-	// This is just the width of a tile times the width of the grid
-	width: function() {
+  // The total width of the game screen. 
+  // This is just the width of a tile times the width of the grid
+  width: function() {
     return 1080;
-	},
+  },
 
-	// The total height of the game screen. 
+  // The total height of the game screen. 
   // This is just the height of a tile times the height of the grid
-	height: function() {
+  height: function() {
     return 540;
-	},
+  },
 
-	// Initialize and start our game
-	start: function() {
-		// Start crafty and set a background color so that we can see it's working
-		Crafty.init(Game.width(), Game.height());
-		Crafty.background('rgb(255, 192, 203)');
+  // Initialize and start our game
+  start: function() {
+    // Start crafty and set a background color so that we can see it's working
+    Crafty.init(Game.width(), Game.height());
+    Crafty.background('rgb(255, 192, 203)');
     // Simply start the "Loading" scene to get things going
     Crafty.scene('Loading');
-	}
+  }
 };
 
 $text_css = { 'size': '24px', 'family': 'Arial', 'color': 'red',

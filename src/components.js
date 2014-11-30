@@ -17,12 +17,13 @@ Crafty.c("Unit",{
 Crafty.c("PlayerCharacter",{
   init: function(){
     this.requires("Unit, Multiway, spr_player")
+      .bind("EnterFrame",this.decrementCounter)
       .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemyShot)
       .onHit('Wall', this.wall)
       .onHit('Powerup', this.powerup);
-    //to add: collide with powerups, enemies, shooting
     this.health = 100;
+    this.counter = 0;
   },
   wall: function(data) {
     if (this.y > 0) {
@@ -37,7 +38,7 @@ Crafty.c("PlayerCharacter",{
     } else {
       this.health = 0;
       alert("You're dead!");
-      // TODO: die please
+      // TODO: die please (game over)
     }
     data.destroy(); // TODO: decide whether we will do anything about the enemy
   },
@@ -48,7 +49,7 @@ Crafty.c("PlayerCharacter",{
     } else {
       this.health = 0;
       alert("You're dead!");
-      // TODO: die please
+      // TODO: die please (game over)
     }
     Crafty.trigger("EnemyKilled",this);
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
@@ -57,13 +58,24 @@ Crafty.c("PlayerCharacter",{
     var powerobj = data[0].obj;
     // TODO: patrick, what do we do with a powerup
     powerobj.destroy();
+  },
+  shoot: function() {
+    if (this.counter == 0) {
+      this.counter = Game.shootingDelay;
+      Crafty.e('Bullet').at(this.x + Game.shooterHeight, this.y);
+    }
+  },
+  decrementCounter: function() {
+    if (this.counter > 0)
+      this.counter = this.counter - 1;
   }
 });
 
 Crafty.c("Enemy",{
   init: function(){
     this.requires("Unit, spr_bush")
-      .bind("EnterFrame",this.act);   
+      .bind("EnterFrame",this.act)
+      .onHit('Bullet', this.bullet); 
     var rand = Math.random();
     if(rand < .4) this.speed = Game.enemySpeed1;
     else if(rand < .8) this.speed = Game.enemySpeed2;
@@ -75,6 +87,11 @@ Crafty.c("Enemy",{
     }
 
     this.move("w",this.speed);
+  },
+  bullet: function(data) {
+    var bulletobj = data[0].obj;
+    bulletobj.destroy();
+    this.destroy();
   }
 });
 
