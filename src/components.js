@@ -45,7 +45,7 @@ Crafty.c("PlayerCharacter",{
       // TODO: die please (game over)
     }
     Crafty.trigger("HealthLost",this);
-    data.destroy(); // TODO: decide whether we will do anything about the enemy
+    data.destroy();
   },
   enemyShot: function(data) {
     var enemy = data[0].obj;
@@ -57,14 +57,11 @@ Crafty.c("PlayerCharacter",{
       // TODO: die please (game over)
     }
     Crafty.trigger("HealthLost",this);
-    enemy.destroy(); // TODO: decide whether we will do anything about the enemy
+    enemy.destroy();
   },
   powerup: function(data) {
-    var powerobj = data[0].obj;
-
     this.power++;
-    // TODO: patrick, what do we do with a powerup
-    powerobj.destroy();
+    data[0].obj.destroy();
   },
   shoot: function() {
     if(!this.isDown("Z")) return;
@@ -109,12 +106,12 @@ Crafty.c("Enemy",{
       Crafty("PlayerCharacter").enemyWalled(this);
   },
   bullet: function(data) {
-    var bulletobj = data[0].obj;
-    bulletobj.destroy();
+    data[0].obj.destroy();
     Crafty.trigger("EnemyKilled",this);
     this.destroy();
   },
   bullete: function(data) {
+    Crafty.trigger("EnemyKilled",this);
     this.destroy();
   }
 });
@@ -216,10 +213,10 @@ Crafty.c("Bar",{
   init: function(){
     this.requires("2D, Canvas, Color")
       .color("green")
-      .attr({x: 0, y: 0, w: Game.width, h: Game.barHeight});
+      .attr({x: 0, y: 5, w: Game.width, h: Game.barHeight});
     this.points = Crafty.e('2D, DOM, Text')
       .text('Points: 0')
-      .attr({ x: 0, y: 0, w: 100 })
+      .attr({ x: 10, y: 10, w: 100 })
       .textFont($text_css);
   },
 
@@ -231,8 +228,16 @@ Crafty.c("Bar",{
     this.points.destroy();
     this.points = Crafty.e('2D, DOM, Text')
       .text('Points: ' + (number*100))
-      .attr({ x: 0, y: 0, w: Game.width})
+      .attr({ x: 0, y: 5, z: 999, w: Game.width})
       .textFont($text_css);
   }
 
+});
+
+Crafty.c("Container",{
+  init: function(){
+    this.requires("2D, Canvas, Color")
+      .color("rgba(255,255,255,0.7)")
+      .attr({x: 0, y: 0, z: 99, w: Game.width, h: Game.barHeight + 10});
+  }
 });
