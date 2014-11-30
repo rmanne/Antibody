@@ -26,6 +26,7 @@ Crafty.c("PlayerCharacter",{
     this.health = Game.totalHealth;
     this.counter = 0;
     this.power = 0;
+    this.shootDelay = Game.shootingDelay;
   },
   wall: function(data) {
     if (this.y > Game.barHeight) {
@@ -66,7 +67,7 @@ Crafty.c("PlayerCharacter",{
   },
   shoot: function() {
     if (this.counter == 0) {
-      this.counter = Game.shootingDelay;
+      this.counter = this.shootDelay;
       if (this.power > 2)
         Crafty.e('WidePowerBullet').at(this.x + Game.shooterHeight, this.y);
       else if (this.power > 1)

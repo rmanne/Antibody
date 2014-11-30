@@ -33,6 +33,8 @@ Crafty.scene('Game', function() {
     bar.update(this.numKilled);
     if(this.numKilled%10==0)
       this.enemySpeed++;
+    if (this.numKilled < 13 * 3 && this.numKilled % 3 == 0)
+      player.shootDelay--;
   });
 
   // Pause scene
