@@ -50,6 +50,7 @@ Crafty.c("PlayerCharacter",{
       alert("You're dead!");
       // TODO: die please
     }
+    Crafty.trigger("EnemyKilled",this);
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   powerup: function(data) {

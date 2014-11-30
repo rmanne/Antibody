@@ -13,11 +13,15 @@ Crafty.scene('Game', function() {
       Crafty.e("Enemy").at(x,y);
     }
   });
+  this.funB = this.bind("EnemyKilled",function(e){
+    this.numKilled++;
+  });
 
   Crafty.e('Wall').at(10,-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height());
 }, function() {
   this.unbind("EnterFrame",this.funA);
+  this.unbind("EnemyKilled",this.funB);
 });
 
 
