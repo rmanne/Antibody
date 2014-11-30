@@ -12,6 +12,7 @@ Crafty.scene('Game', function() {
                 + Game.shooterHeight/2;
       var x = Game.width()-Game.shooterWidth*2;
       Crafty.e("Enemy").at(x,y);
+      Crafty.e('Powerup').at(x, y + 20);
     }
   });
   this.funB = this.bind("EnemyKilled",function(e){
