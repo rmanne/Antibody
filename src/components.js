@@ -102,3 +102,22 @@ Crafty.c("Wall",{
     this.requires('Unit, spr_player');
   }
 });
+
+Crafty.c("Pause", {
+    _text: '',
+    init: function(){
+        this._text = Crafty.e('2D, DOM, Text')
+            .setName("Pause")
+            .text('Paused; press P to continue...')
+            .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+            .textFont($text_css)
+            .css({'display': 'none'});
+    },
+    draw: function(){
+        this._text.css({'display': 'block'});
+        this._text.draw();
+    },
+    hide: function(){
+        this._text.css({'display': 'none'});
+    }
+});

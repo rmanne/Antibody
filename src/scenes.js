@@ -17,6 +17,21 @@ Crafty.scene('Game', function() {
     this.numKilled++;
   });
 
+  // Pause scene
+  // -----------
+  // Handles pausing the game
+  var text = Crafty.e('Pause');
+  this.bind('KeyDown', function(i) {
+      if(i.key === Crafty.keys.P) {
+          if (!Crafty.isPaused()) {
+              text.draw();
+              //Crafty.e('Pause').css({'display': 'block'});
+          } else text.hide();
+               
+          Crafty.trigger('NewEntity', Crafty.pause());
+      }
+  });
+
   Crafty.e('Wall').at(10,-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height());
 }, function() {
