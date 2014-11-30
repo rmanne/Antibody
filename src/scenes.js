@@ -82,10 +82,9 @@ Crafty.scene('Victory', function() {
 Crafty.scene('Loading', function(){
   // Draw some text for the player to see in case the file
   //  takes a noticeable amount of time to load
-  Crafty.e('2D, DOM, Text')
-    .text('Loading; please wait...')
-    .attr({ x: 0, y: Game.height/2 - 24, w: Game.width })
-    .textFont($text_css);
+  Crafty.e('2D, DOM, Image')
+    .image('assets/loading.png')
+    .attr({ x: 70, y: Game.height/2 - 60, w: Game.width });
 
   // console.log(Crafty.support.audio);
 
@@ -93,19 +92,13 @@ Crafty.scene('Loading', function(){
   Crafty.load({
     'audio': [
       'assets/door_knock_3x.mp3',
-      // 'assets/door_knock_3x.ogg',
-      // 'assets/door_knock_3x.aac',
       'assets/board_room_applause.mp3',
-      // 'assets/board_room_applause.ogg',
-      // 'assets/board_room_applause.aac',
-      'assets/candy_dish_lid.mp3',
-      // 'assets/candy_dish_lid.ogg',
-      // 'assets/candy_dish_lid.aac'
+      'assets/candy_dish_lid.mp3'
     ],
 
     "images": [    
      'assets/16x16_forest_2.gif',
-     'assets/hunter.png',
+     'assets/player.png',
     ],
   }
 
@@ -117,18 +110,23 @@ Crafty.scene('Loading', function(){
     // These components' names are prefixed with "spr_"
     //  to remind us that they simply cause the entity
     //  to be drawn with a certain sprite
-    Crafty.sprite(16, 'assets/16x16_forest_2.gif', {
-      spr_tree:    [0, 0],
-      spr_bush:    [1, 0],
-      spr_village: [0, 1],
-      spr_rock:    [1, 1]
+    Crafty.sprite(32, 'assets/flu.png', {
+      spr_bush:    [0, 0]
+    });
+    
+    Crafty.sprite(16, 'assets/pill.png', {
+      spr_pill:    [0, 0]
+    });
+    
+    Crafty.sprite(24, 'assets/syringe.png', {
+      spr_rock:    [0, 0]
     });
 
     // Define the PC's sprite to be the first sprite in the third row of the
     //  animation sprite map
-    Crafty.sprite(16, 'assets/hunter.png', {
-      spr_player:  [0, 2],
-    }, 0, 2);
+    Crafty.sprite(32, 'assets/player.png', {
+      spr_player:  [0, 0]
+    });
 
     // Define our sounds for later use
     Crafty.audio.add({

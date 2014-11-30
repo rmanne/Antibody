@@ -121,7 +121,7 @@ Crafty.c("Enemy",{
 
 Crafty.c("Powerup", {
   init: function() {
-    this.requires("Unit, spr_player")
+    this.requires("Unit, spr_pill")
       .bind("EnterFrame", this.act)
       .onHit('Bullet', this.bullet);
   },
