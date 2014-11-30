@@ -4,11 +4,12 @@
 Crafty.scene('Game', function() {
   Crafty.e('Wall').at(10,Game.barHeight-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height);
-
+  
   var player = Crafty.e('PlayerCharacter')
-    .at(5,Game.height/2)
+    .at(20,Game.height/2)
     .resize(Game.shooterWidth,Game.shooterHeight);
-  var bar = Crafty.e("Bar").color("green").health(player.health);
+  var bar = Crafty.e("Container");
+  var bar = Crafty.e("Bar").color("rgb(255,255,255)").health(player.health);
 
   this.enemySpeed = 2;
   this.numKilled = 0;
