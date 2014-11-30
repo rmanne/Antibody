@@ -3,26 +3,36 @@
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
   Crafty.e('Wall').at(10,Game.barHeight-Game.shooterHeight);
-  Crafty.e('Wall').at(10,Game.height());
+  Crafty.e('Wall').at(10,Game.height);
 
   var player = Crafty.e('PlayerCharacter')
-    .at(5,Game.height()/2)
+    .at(5,Game.height/2)
     .resize(Game.shooterWidth,Game.shooterHeight);
   var bar = Crafty.e("Bar").color("green").health(player.health);
 
+  this.enemySpeed = 2;
   this.numKilled = 0;
   this.funA = this.bind("EnterFrame",function(e){
-    if(e.frame%(Math.max(Game.spawnDelay-this.numKilled,10)) == 0){
-      var y = Math.random()*(Game.height()-Game.shooterHeight-Game.barHeight)
+    if(e.frame%(Math.max(Game.spawnDelay-this.numKilled*3,30)) == 0){
+      var y = Math.random()*(Game.height-Game.shooterHeight-Game.barHeight)
               + Game.barHeight;
-      var x = Game.width()-Game.shooterWidth*2;
-      Crafty.e("Enemy").at(x,y).resize(Game.shooterWidth,Game.shooterHeight);
-      Crafty.e('Powerup').at(x, y + 20);
+      var x = Game.width-Game.shooterWidth*2;
+      Crafty.e("Enemy").at(x,y)
+        .resize(Game.shooterWidth,Game.shooterHeight)
+        .setSpeed(this.enemySpeed);
+    }
+    if(e.frame%(Game.spawnDelay*1.5) == 0){
+      var y = Math.random()*(Game.height-Game.shooterHeight-Game.barHeight)
+              + Game.barHeight;
+      var x = Game.width-Game.shooterWidth*2;
+      Crafty.e("Powerup").at(x,y);
     }
   });
   this.funB = this.bind("EnemyKilled",function(e){
     this.numKilled++;
     bar.update(this.numKilled);
+    if(this.numKilled%10==0)
+      this.enemySpeed++;
   });
 
   // Pause scene
@@ -71,7 +81,7 @@ Crafty.scene('Loading', function(){
   //  takes a noticeable amount of time to load
   Crafty.e('2D, DOM, Text')
     .text('Loading; please wait...')
-    .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+    .attr({ x: 0, y: Game.height/2 - 24, w: Game.width })
     .textFont($text_css);
 
   // console.log(Crafty.support.audio);

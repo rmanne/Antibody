@@ -29,7 +29,7 @@ Crafty.c("PlayerCharacter",{
   },
   wall: function(data) {
     if (this.y > Game.barHeight) {
-      this.y = Game.height() - Game.shooterHeight;
+      this.y = Game.height - Game.shooterHeight;
     } else {
       this.y = Game.barHeight;
     }
@@ -93,10 +93,12 @@ Crafty.c("Enemy",{
       .onHit('Bullet', this.bullet)
       .onHit('PowerBullet', this.bullete)
       .resize(Game.shooterWidth,Game.shooterHeight); 
-    var rand = Math.random();
-    if(rand < .4) this.speed = Game.enemySpeed1;
-    else if(rand < .8) this.speed = Game.enemySpeed2;
-    else this.speed=Game.enemySpeed3;
+  },
+  setSpeed: function(num){
+    var ran = Math.random();
+    if(ran < .4) this.speed = num-1;
+    else if(ran < .8) this.speed = num;
+    else this.speed = num+1;
   },
   act: function(){
     this.move("w",this.speed);
@@ -121,7 +123,7 @@ Crafty.c("Powerup", {
       .onHit('Bullet', this.bullet);
   },
   act: function() {
-    this.move("w", Game.enemySpeed1);
+    this.move("w", 7);
     if (this.x < 0)
       this.destroy();
   },
@@ -138,7 +140,7 @@ Crafty.c("Bullet",{
   },
   act: function(){
     this.move("e",Game.bulletSpeed);
-    if (this.x > Game.width())
+    if (this.x > Game.width)
       this.destroy();
   }
 });
@@ -150,7 +152,7 @@ Crafty.c("PowerBullet",{
   },
   act: function(){  
     this.move("e",Game.bulletSpeed);
-    if (this.x > Game.width())
+    if (this.x > Game.width)
       this.destroy();
   }
 });
@@ -194,7 +196,7 @@ Crafty.c("Pause", {
         this._text = Crafty.e('2D, DOM, Text')
             .setName("Pause")
             .text('Paused; press P to continue...')
-            .attr({ x: 0, y: Game.height()/2 - 24, w: Game.width() })
+            .attr({ x: 0, y: Game.height/2 - 24, w: Game.width })
             .textFont($text_css)
             .css({'display': 'none'});
     },
@@ -211,7 +213,7 @@ Crafty.c("Bar",{
   init: function(){
     this.requires("2D, Canvas, Color")
       .color("green")
-      .attr({x: 0, y: 0, w: Game.width(), h: Game.barHeight});
+      .attr({x: 0, y: 0, w: Game.width, h: Game.barHeight});
     this.points = Crafty.e('2D, DOM, Text')
       .text('Points: 0')
       .attr({ x: 0, y: 0, w: 100 })
@@ -219,14 +221,14 @@ Crafty.c("Bar",{
   },
 
   health: function(health){
-    this.w = health/Game.totalHealth*Game.width();
+    this.w = health/Game.totalHealth*Game.width;
     return this;
   },
   update: function(number) {
     this.points.destroy();
     this.points = Crafty.e('2D, DOM, Text')
       .text('Points: ' + (number*100))
-      .attr({ x: 0, y: 0, w: Game.width()})
+      .attr({ x: 0, y: 0, w: Game.width})
       .textFont($text_css);
   }
 
