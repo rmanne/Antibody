@@ -5,8 +5,8 @@ Game = {
   enemySpeed2: 2,
   enemySpeed3: 3,
   spawnDelay: 120,
-  shooterWidth: 16,
-  shooterHeight: 16,
+  shooterWidth: 32,
+  shooterHeight: 32,
   shootingDelay: 25,
 
   // The total width of the game screen. 

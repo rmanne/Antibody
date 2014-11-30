@@ -2,16 +2,16 @@
 // -------------
 // Runs the core gameplay loop
 Crafty.scene('Game', function() {
-	var a = Crafty.e('PlayerCharacter').at(5,5);
+	var a = Crafty.e('PlayerCharacter').at(5,5).resize(Game.shooterWidth,Game.shooterHeight);
   a.shift(10,10);
 
   this.numKilled = 0;
   this.funA = this.bind("EnterFrame",function(e){
     if(e.frame%(Math.max(Game.spawnDelay-this.numKilled,10)) == 0){
       var y = Math.random()*(Game.height()-Game.shooterHeight)
-                + Game.shooterHeight/2;
+                ;
       var x = Game.width()-Game.shooterWidth*2;
-      Crafty.e("Enemy").at(x,y);
+      Crafty.e("Enemy").at(x,y).resize(Game.shooterWidth,Game.shooterHeight);
       Crafty.e('Powerup').at(x, y + 20);
     }
   });
@@ -38,6 +38,7 @@ Crafty.scene('Game', function() {
 
   Crafty.e('Wall').at(10,-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height());
+  Crafty.e("Bar");
 }, function() {
   this.unbind("EnterFrame",this.funA);
   this.unbind("EnemyKilled",this.funB);

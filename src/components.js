@@ -21,7 +21,8 @@ Crafty.c("PlayerCharacter",{
       .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemyShot)
       .onHit('Wall', this.wall)
-      .onHit('Powerup', this.powerup);
+      .onHit('Powerup', this.powerup)
+      .resize(Game.shooterWidth,Game.shooterHeight);
     this.health = 100;
     this.counter = 0;
     this.power = 0;
@@ -89,7 +90,8 @@ Crafty.c("Enemy",{
     this.requires("Unit, spr_bush")
       .bind("EnterFrame",this.act)
       .onHit('Bullet', this.bullet)
-      .onHit('PowerBullet', this.bullete); 
+      .onHit('PowerBullet', this.bullete)
+      .resize(Game.shooterWidth,Game.shooterHeight); 
     var rand = Math.random();
     if(rand < .4) this.speed = Game.enemySpeed1;
     else if(rand < .8) this.speed = Game.enemySpeed2;
@@ -200,4 +202,10 @@ Crafty.c("Pause", {
     hide: function(){
         this._text.css({'display': 'none'});
     }
+});
+
+Crafty.c("Bar",{
+  init: function(){
+    
+  }
 });
