@@ -7,6 +7,7 @@ Game = {
   spawnDelay: 120,
   shooterWidth: 16,
   shooterHeight: 16,
+  shootingDelay: 5,
 
 	// The total width of the game screen. 
 	// This is just the width of a tile times the width of the grid

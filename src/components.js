@@ -18,7 +18,7 @@ Crafty.c("PlayerCharacter",{
   init: function(){
     this.requires("Unit, Multiway, spr_player")
       .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
-      .onHit('Enemy', this.enemy)
+      .onHit('Enemy', this.enemyShot)
       .onHit('Wall', this.wall)
       .onHit('Powerup', this.powerup);
     //to add: collide with powerups, enemies, shooting
@@ -31,7 +31,7 @@ Crafty.c("PlayerCharacter",{
       this.y = 0;
     }
   },
-  enemy_custom: function(data) {
+  enemyWalled: function(data) {
     if (this.health > 10) {
       this.health = this.health - 10;
     } else {
@@ -41,7 +41,7 @@ Crafty.c("PlayerCharacter",{
     }
     data.destroy(); // TODO: decide whether we will do anything about the enemy
   },
-  enemy: function(data) {
+  enemyShot: function(data) {
     var enemy = data[0].obj;
     if (this.health > 10) {
       this.health = this.health - 10;
@@ -70,7 +70,7 @@ Crafty.c("Enemy",{
   },
   act: function(){
     if (this.x < 0) {
-      Crafty("PlayerCharacter").enemy_custom(this);
+      Crafty("PlayerCharacter").enemyWalled(this);
     }
 
     this.move("w",this.speed);

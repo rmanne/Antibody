@@ -6,7 +6,7 @@ Crafty.scene('Game', function() {
   a.shift(10,10);
 
   this.numKilled = 0;
-  Crafty.bind("EnterFrame",function(e){
+  this.funA = this.bind("EnterFrame",function(e){
     if(e.frame%(Math.max(Game.spawnDelay-this.numKilled,10)) == 0){
       var y = Math.random()*(Game.height()-Game.shooterHeight) + Game.shooterHeight/2;
       var x = Game.width()-Game.shooterWidth*2;
@@ -17,7 +17,7 @@ Crafty.scene('Game', function() {
   Crafty.e('Wall').at(10,-Game.shooterHeight);
   Crafty.e('Wall').at(10,Game.height());
 }, function() {
-
+  this.unbind("EnterFrame",this.funA);
 });
 
 
