@@ -16,8 +16,9 @@ Crafty.c("Unit",{
 
 Crafty.c("PlayerCharacter",{
   init: function(){
-    this.requires("Unit, Multiway, spr_player")
+    this.requires("Unit, Multiway, Keyboard, spr_player")
       .bind("EnterFrame",this.decrementCounter)
+      .bind("EnterFrame",this.shoot)
       .multiway(Game.walkingSpeed, {UP_ARROW: -90, DOWN_ARROW: 90})
       .onHit('Enemy', this.enemyShot)
       .onHit('Wall', this.wall)
@@ -66,6 +67,7 @@ Crafty.c("PlayerCharacter",{
     powerobj.destroy();
   },
   shoot: function() {
+    if(!this.isDown("Z")) return;
     if (this.counter == 0) {
       this.counter = this.shootDelay;
       if (this.power > 2)

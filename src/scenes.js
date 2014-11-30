@@ -27,6 +27,7 @@ Crafty.scene('Game', function() {
       var x = Game.width-Game.shooterWidth*2;
       Crafty.e("Powerup").at(x,y);
     }
+
   });
   this.funB = this.bind("EnemyKilled",function(e){
     this.numKilled++;
@@ -50,8 +51,8 @@ Crafty.scene('Game', function() {
                
           Crafty.trigger('NewEntity', Crafty.pause());
       }
-      if (e.key == Crafty.keys.Z)
-        Crafty("PlayerCharacter").shoot();
+      // if (e.key == Crafty.keys.Z)
+        // player.shoot();
   });
 
   this.funD = this.bind('HealthLost', function(){
