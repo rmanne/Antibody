@@ -22,6 +22,7 @@ Crafty.scene('Game', function() {
   });
   this.funB = this.bind("EnemyKilled",function(e){
     this.numKilled++;
+    Crafty("Bar").update(this.numKilled);
   });
 
   // Pause scene

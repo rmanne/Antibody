@@ -53,7 +53,6 @@ Crafty.c("PlayerCharacter",{
       alert("You're dead!");
       // TODO: die please (game over)
     }
-    Crafty.trigger("EnemyKilled",this);
     enemy.destroy(); // TODO: decide whether we will do anything about the enemy
   },
   powerup: function(data) {
@@ -105,6 +104,7 @@ Crafty.c("Enemy",{
   bullet: function(data) {
     var bulletobj = data[0].obj;
     bulletobj.destroy();
+    Crafty.trigger("EnemyKilled",this);
     this.destroy();
   },
   bullete: function(data) {
@@ -217,6 +217,17 @@ Crafty.c("Bar",{
 
   health: function(health){
     this._healthBar.w = health*10;
+    this.points = Crafty.e('2D, DOM, Text')
+      .text('Points: 0')
+      .attr({ x: 0, y: 0, w: Game.width() })
+      .textFont($text_css);
+  },
+  update: function(number) {
+    this.points.destroy();
+    this.points = Crafty.e('2D, DOM, Text')
+      .text('Points: ' + number)
+      .attr({ x: 0, y: 0, w: Game.width()})
+      .textFont($text_css);
   }
 
 });
