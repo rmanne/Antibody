@@ -91,9 +91,7 @@ Crafty.scene('Loading', function(){
   // Load our sprite map image
   Crafty.load({
     'audio': [
-      'assets/door_knock_3x.mp3',
-      'assets/board_room_applause.mp3',
-      'assets/candy_dish_lid.mp3'
+      'assets/wind_god_girl.mp3'
     ],
 
     "images": [    
@@ -130,9 +128,7 @@ Crafty.scene('Loading', function(){
 
     // Define our sounds for later use
     Crafty.audio.add({
-      knock:    ['assets/door_knock_3x.mp3'],
-      applause: ['assets/board_room_applause.mp3'],
-      ring:     ['assets/candy_dish_lid.mp3']
+      music:    ['assets/wind_god_girl.mp3']
     });
     // Now that our sprites are ready to draw, start the game
     Crafty.scene('Game');
